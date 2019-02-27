@@ -280,7 +280,7 @@ public class TestCaseOfHl7SinkForTls {
                 "uri = 'hl7://localhost:5014', " +
                 "hl7.encoding = 'er7', " +
                 "tls.enabled = 'true', " +
-                "tls.keystore.filepath = 'src/test/resources/security/kk.jks', " +
+                "tls.keystore.filepath = 'src/test/resources/security/kk.js', " +
                 "tls.keystore.passphrase = 'chaaangeit', " +
                 "@map(type = 'text', @payload(\"{{payload}}\")))" +
                 "define stream hl7stream(payload string);";
