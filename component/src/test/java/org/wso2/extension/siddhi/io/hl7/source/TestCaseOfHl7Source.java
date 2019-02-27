@@ -502,9 +502,6 @@ public class TestCaseOfHl7Source {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 source  to test invalid ack encoding");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Source.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
         receivedEvent = new ArrayList<>(3);
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +

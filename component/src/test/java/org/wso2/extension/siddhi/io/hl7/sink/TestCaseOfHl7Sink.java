@@ -306,9 +306,6 @@ public class TestCaseOfHl7Sink {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 Sink test with uri format for Invalid Uri hl7://<host>:<port>.");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Hl7Sink.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
@@ -332,9 +329,6 @@ public class TestCaseOfHl7Sink {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 Sink test with uri format for Invalid Uri hl7://<host>:<port>.");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Hl7Sink.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
@@ -358,9 +352,6 @@ public class TestCaseOfHl7Sink {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 Sink test with invalid Uri <host>:<port>.");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Hl7Sink.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
@@ -668,9 +659,6 @@ public class TestCaseOfHl7Sink {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 Sink test with Invalid Hl7 Encoding -  given hl7 encoding format is invalid");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Hl7Sink.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
@@ -701,9 +689,6 @@ public class TestCaseOfHl7Sink {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 Sink test with Invalid Hl7 Encoding -  given hl7 encoding format is invalid");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Hl7Sink.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
