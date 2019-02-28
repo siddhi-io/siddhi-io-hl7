@@ -41,7 +41,6 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * HL7ReceivingApp is a consumer of a message and it process the message returns the acknowledgement.
  */
-
 public class Hl7ReceivingApp implements ReceivingApplication {
 
     private static final Logger log = Logger.getLogger(Hl7ReceivingApp.class);
@@ -58,7 +57,6 @@ public class Hl7ReceivingApp implements ReceivingApplication {
     private String streamID;
 
     public Hl7ReceivingApp() {
-
     }
 
     /**

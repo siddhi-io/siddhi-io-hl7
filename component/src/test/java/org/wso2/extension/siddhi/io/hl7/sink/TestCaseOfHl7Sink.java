@@ -39,6 +39,9 @@ import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 import java.io.File;
 import java.nio.charset.UnsupportedCharsetException;
 
+/**
+ * Class implementing the Test cases for Hl7 Sink.
+ */
 public class TestCaseOfHl7Sink {
 
     private static Logger log = Logger.getLogger(TestCaseOfHl7Sink.class);

@@ -16,7 +16,6 @@
  *  under the License.
  *
  */
-
 package org.wso2.extension.siddhi.io.hl7.util;
 
 import ca.uhn.hl7v2.model.Message;
@@ -40,6 +39,12 @@ public class TestUtil {
         msgSegment = null;
     }
 
+    /**
+     * Used to parse the inputStream to String type
+     *
+     * @param message - hl7 message object
+     * @return control ID of the message
+     */
     public String getControlID(Message message) {
 
         if (message instanceof ADT_A01) {

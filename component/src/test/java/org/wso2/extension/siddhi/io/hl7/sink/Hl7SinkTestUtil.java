@@ -35,6 +35,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Util class for running test cases.
+ */
 public class Hl7SinkTestUtil {
 
     private static final Logger log = Logger.getLogger(Hl7SinkTestUtil.class);

@@ -171,7 +171,6 @@ public class Hl7Source extends Source {
     private String tlsKeystoreType;
     private String streamID;
     private String siddhiAppName;
-
     @Override
     public void init(SourceEventListener sourceEventListener, OptionHolder optionHolder,
                      String[] requestedTransportPropertyNames, ConfigReader configReader,

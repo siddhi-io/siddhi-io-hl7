@@ -45,6 +45,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Class implementing the Test cases for Hl7 Source.
+ */
 public class TestCaseOfHl7Source {
 
     private static Logger log = Logger.getLogger(TestCaseOfHl7Source.class);
@@ -951,20 +954,16 @@ public class TestCaseOfHl7Source {
 
         sources.forEach(e -> e.forEach(Source::pause));
         log.info("SiddhiApp paused...............................");
-
         SiddhiTestHelper.waitForEvents(waitTime, 1, count, timeout);
         Assert.assertFalse(eventArrived);
         stream.send(new Object[]{payLoadER71});
         SiddhiTestHelper.waitForEvents(waitTime, 1, count, timeout);
-
         sources.forEach(e -> e.forEach(Source::resume));
         log.info("SiddhiApp resumed.............................");
         stream.send(new Object[]{payLoadER72});
         SiddhiTestHelper.waitForEvents(waitTime, 1, count, timeout);
-
         stream.send(new Object[]{payLoadER73});
         SiddhiTestHelper.waitForEvents(waitTime, 1, count, timeout);
-
         expected.add(testUtil.getControlID(pipeParser.parse(payLoadER71)));
         expected.add(testUtil.getControlID(pipeParser.parse(payLoadER72)));
         expected.add(testUtil.getControlID(pipeParser.parse(payLoadER73)));

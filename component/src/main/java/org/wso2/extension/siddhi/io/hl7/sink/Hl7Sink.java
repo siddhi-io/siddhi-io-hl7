@@ -338,4 +338,3 @@ public class Hl7Sink extends Sink {
         }
     }
 }
-

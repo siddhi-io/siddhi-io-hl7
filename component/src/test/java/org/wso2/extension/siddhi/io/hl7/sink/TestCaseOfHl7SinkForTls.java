@@ -34,6 +34,9 @@ import org.wso2.siddhi.core.stream.input.InputHandler;
 
 import java.io.File;
 
+/**
+ * Class implementing the Test cases for Hl7 Sink with Tls.
+ */
 public class TestCaseOfHl7SinkForTls {
 
     private volatile int count;

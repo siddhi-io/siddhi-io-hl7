@@ -37,6 +37,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Class implementing the Test cases for Hl7 Source with Tls.
+ */
 public class TestCaseOfHl7SourceForTls {
 
     private static Logger log = Logger.getLogger(TestCaseOfHl7SourceForTls.class);
