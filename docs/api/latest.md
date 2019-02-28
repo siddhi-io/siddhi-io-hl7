@@ -128,7 +128,7 @@ define stream hl7stream(MSH1 string, MSH2 string, MSH3HD1 string, MSH4HD1 string
 
 <span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span>
 ```
-@source(type="hl7", port="<INT>", hl7.encoding="<STRING>", hl7.ack.encoding="<STRING>", charset="<STRING>", tls.enabled="<BOOL>", tls.keystore.filepath="<STRING>", tls.keystore.type="<STRING>", tls.keystore.passphrase="<STRING>", hl7.conformance.profile.used="<BOOL>", hl7.conformance.profile.file.path="<STRING>", @map(...)))
+@source(type="hl7", port="<INT>", hl7.encoding="<STRING>", hl7.ack.encoding="<STRING>", charset="<STRING>", tls.enabled="<BOOL>", tls.keystore.type="<STRING>", tls.keystore.filepath="<STRING>", tls.keystore.passphrase="<STRING>", hl7.conformance.profile.used="<BOOL>", hl7.conformance.profile.file.path="<STRING>", @map(...)))
 ```
 
 <span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
@@ -182,17 +182,17 @@ define stream hl7stream(MSH1 string, MSH2 string, MSH3HD1 string, MSH4HD1 string
         <td style="vertical-align: top">No</td>
     </tr>
     <tr>
-        <td style="vertical-align: top">tls.keystore.filepath</td>
-        <td style="vertical-align: top; word-wrap: break-word">The file path to the location of the keystore of the client that sendsthe HL7 events via the <code>MLLP</code> protocol. A custom keystore can bespecified if required. If a custom keystore is not specified, then the systemuses the default <code>wso2carbon</code> keystore in the <code>${carbon.home}/resources/security</code> directory. </td>
-        <td style="vertical-align: top">${carbon.home}/resources/security/wso2carbon.jks</td>
+        <td style="vertical-align: top">tls.keystore.type</td>
+        <td style="vertical-align: top; word-wrap: break-word">The type for the keystore. A custom keystore type can be specified if required. If no custom keystore type is specified, then the system uses <code>JKS</code> as the default keystore type.</td>
+        <td style="vertical-align: top">JKS</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>
     </tr>
     <tr>
-        <td style="vertical-align: top">tls.keystore.type</td>
-        <td style="vertical-align: top; word-wrap: break-word">The type for the keystore. A custom keystore type can be specified if required. If no custom keystore type is specified, then the system uses <code>JKS</code> as the default keystore type.</td>
-        <td style="vertical-align: top">JKS</td>
+        <td style="vertical-align: top">tls.keystore.filepath</td>
+        <td style="vertical-align: top; word-wrap: break-word">The file path to the location of the keystore of the client that sendsthe HL7 events via the <code>MLLP</code> protocol. A custom keystore can bespecified if required. If a custom keystore is not specified, then the systemuses the default <code>wso2carbon</code> keystore in the <code>${carbon.home}/resources/security</code> directory. </td>
+        <td style="vertical-align: top">${carbon.home}/resources/security/wso2carbon.jks</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>

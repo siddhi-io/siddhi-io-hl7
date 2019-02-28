@@ -51,7 +51,6 @@ import java.util.Map;
 /**
  * Hl7 Source Implementation
  */
-
 @Extension(
         name = "hl7",
         namespace = "source",
@@ -89,6 +88,13 @@ import java.util.Map;
                         optional = true, defaultValue = "false",
                         type = {DataType.BOOL}),
 
+                @Parameter(name = "tls.keystore.type",
+                        description = "The type for the keystore. A custom keystore type can be specified " +
+                                "if required. If no custom keystore type is specified, then the system uses " +
+                                "`JKS` as the default keystore type.",
+                        optional = true, defaultValue = "JKS",
+                        type = {DataType.STRING}),
+
                 @Parameter(name = "tls.keystore.filepath",
                         description = "The file path to the location of the keystore of the client that sends" +
                                 "the HL7 events via the `MLLP` protocol. A custom keystore can be" +
@@ -96,13 +102,6 @@ import java.util.Map;
                                 "uses the default `wso2carbon` keystore in the `${carbon.home}/resources/security` " +
                                 "directory. ",
                         optional = true, defaultValue = "${carbon.home}/resources/security/wso2carbon.jks",
-                        type = {DataType.STRING}),
-
-                @Parameter(name = "tls.keystore.type",
-                        description = "The type for the keystore. A custom keystore type can be specified " +
-                                "if required. If no custom keystore type is specified, then the system uses " +
-                                "`JKS` as the default keystore type.",
-                        optional = true, defaultValue = "JKS",
                         type = {DataType.STRING}),
 
                 @Parameter(name = "tls.keystore.passphrase",
@@ -172,6 +171,7 @@ public class Hl7Source extends Source {
     private String tlsKeystoreType;
     private String streamID;
     private String siddhiAppName;
+
     @Override
     public void init(SourceEventListener sourceEventListener, OptionHolder optionHolder,
                      String[] requestedTransportPropertyNames, ConfigReader configReader,
