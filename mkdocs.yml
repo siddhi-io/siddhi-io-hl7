@@ -11,6 +11,10 @@ extra:
     accent: teal
 pages:
 - Welcome to WSO2 Siddhi IO Hl7: index.md
-- API Docs:
+- API Docs: null
 - License: about/license.md
+- API Docs:
+  - Latest (): api/latest.md
+  - ? ''
+    : api/.md
 theme: material

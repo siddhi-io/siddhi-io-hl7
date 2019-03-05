@@ -42,10 +42,12 @@ import org.wso2.siddhi.core.stream.input.source.Source;
 import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.core.util.transport.OptionHolder;
+import org.wso2.siddhi.query.api.definition.Attribute;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -65,8 +67,8 @@ import java.util.Map;
                         description = "Encoding method of received hl7. This can be er7 or xml. User should define " +
                                 "hl7 encoding type according to their mapping. \n" +
                                 "e.g., \n" +
-                                "If text mapping is used, then the hl7 encoding type should be er7. \n" +
-                                "If xml mapping is used, then the hl7 encoding type should be xml. ",
+                                "If `text` mapping is used, then the hl7 encoding type should be `er7`. \n" +
+                                "If `xml` mapping is used, then the hl7 encoding type should be `xml`. ",
                         type = {DataType.STRING}),
 
                 @Parameter(name = "hl7.ack.encoding",
@@ -120,9 +122,9 @@ import java.util.Map;
                         type = {DataType.BOOL}),
 
                 @Parameter(name = "hl7.conformance.profile.file.path",
-                        description = "Path conformance profile file that is used to validate the incoming " +
-                                "message. User should give the file path, if conformance profile is used to validate " +
-                                "the message. ",
+                        description = "The file path to the location of the conformance profile file that is used to " +
+                                "validate the incoming message. User should give the file path, if conformance " +
+                                "profile is used to validate the message. ",
                         optional = true, defaultValue = "Empty",
                         type = {DataType.STRING})
 
@@ -148,7 +150,7 @@ import java.util.Map;
                                 "MSH10 = \"ns:MSH/ns:MSH.10\", MSH3HD1 = \"ns:MSH/ns:MSH.3/ns:HD.1\")))\n" +
                                 "define stream hl7stream (MSH10 string, MSH3HD1 string); \n"
                         ,
-                        description = "This receives the HL7 messages nd send the acknowledgement message to the " +
+                        description = "This receives the HL7 messages and sends the acknowledgement message to the " +
                                 "client using the MLLP protocol and custom xml mapping. \n "
                 )
         }
@@ -171,6 +173,8 @@ public class Hl7Source extends Source {
     private String tlsKeystoreType;
     private String streamID;
     private String siddhiAppName;
+    private List<Attribute> attribute;
+
     @Override
     public void init(SourceEventListener sourceEventListener, OptionHolder optionHolder,
                      String[] requestedTransportPropertyNames, ConfigReader configReader,
@@ -179,6 +183,7 @@ public class Hl7Source extends Source {
         this.sourceEventListener = sourceEventListener;
         this.streamID = sourceEventListener.getStreamDefinition().getId();
         this.siddhiAppName = siddhiAppContext.getName();
+        this.attribute = sourceEventListener.getStreamDefinition().getAttributeList();
         this.port = Integer.parseInt(optionHolder.validateAndGetStaticValue(Hl7Constants.HL7_PORT_NO));
         this.hl7Encoding = optionHolder.validateAndGetStaticValue(Hl7Constants.HL7_ENCODING);
         this.hl7AckEncoding = optionHolder.validateAndGetStaticValue(Hl7Constants.ACK_HL7_ENCODING,
@@ -234,7 +239,7 @@ public class Hl7Source extends Source {
         }
         hl7Service.registerApplication(new RegistrationEventRouting(), new Hl7ReceivingApp(sourceEventListener,
                 siddhiAppName, streamID, hl7Encoding, hl7AckEncoding, hapiContext, conformanceProfileUsed,
-                conformanceProfile));
+                conformanceProfile, attribute));
         hl7Service.setExceptionHandler(new Hl7ExceptionHandler());
     }
 
@@ -249,7 +254,7 @@ public class Hl7Source extends Source {
 
     @Override
     public void destroy() {
-
+        //Not applicable
     }
 
     @Override

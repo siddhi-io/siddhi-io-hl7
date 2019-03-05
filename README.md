@@ -1,9 +1,19 @@
 ﻿siddhi-io-hl7
 ======================================
 
+The **siddhi-io-hl7 extension** is an extension to Siddhi that can be used to transmit  <a target="_blank" href="http://www.hl7.org/about/index.cfm?ref=common">Health Level 7 International</a> (HL7) messages. This uses the HAPI parser that supports HL7 V 2.x messages, to provide HL7 support.
+
+Find some useful links below:
+
+
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-hl7">Source code</a>
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-hl7/releases">Releases</a>
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-hl7/issues">Issue tracker</a>
 
 
 
+
+## How to use
 
 **Using the extension in <a target="_blank" href="https://github.com/wso2/product-sp">WSO2 Stream Processor</a>**
 
@@ -18,19 +28,33 @@
 ```
      <dependency>
         <groupId>org.wso2.extension.siddhi.io.</groupId>
-        <artifactId>siddhi-io-</artifactId>
+        <artifactId>siddhi-io-hl7</artifactId>
         <version>x.x.x</version>
      </dependency>
 ```
 
 
+## Features
+
+**hl7(Sink)**
+
+The hl7 sink publishes the hl7 messages using MLLP protocol.
 
 
+**hl7(Source)**
+
+The hl7 source consumes the hl7 messages using MLLP protocol.
 
 
+## How to Contribute
 
+ * Please report issues at <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-hl7/issues">GitHub Issue Tracker</a>.
 
- * Post your questions with the <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">"Siddhi"</a> tag in <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">Stackoverflow</a>.
+ * Send your contributions as pull requests to <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-hl7/tree/master">master branch</a>.
+
+## Contact us
+
+* Post your questions with the <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">"Siddhi"</a> tag in <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">Stackoverflow</a>.
 
  * Siddhi developers can be contacted via the mailing lists:
 
@@ -38,7 +62,7 @@
 
     Architecture List : [architecture@wso2.org](mailto:architecture@wso2.org)
 
-
+## Support
 * We are committed to ensuring support for this extension in production. Our unique approach ensures that all support leverages our open development methodology and is provided by the very same engineers who build the technology.
 
 * For more details and to take advantage of this unique opportunity contact us via <a target="_blank" href="http://wso2.com/support?utm_source=gitanalytics&utm_campaign=gitanalytics_Jul17">http://wso2.com/support/</a>.

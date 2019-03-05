@@ -301,7 +301,7 @@ public class Hl7Sink extends Sink {
 
     @Override
     public void destroy() {
-
+        //Not applicable
     }
 
     @Override
@@ -312,7 +312,7 @@ public class Hl7Sink extends Sink {
 
     @Override
     public void restoreState(Map<String, Object> map) {
-
+        //No state to restore
     }
 
     private void getValuesFromUri() {

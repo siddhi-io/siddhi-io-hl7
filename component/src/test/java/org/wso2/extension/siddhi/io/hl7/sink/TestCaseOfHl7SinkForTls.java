@@ -64,7 +64,6 @@ public class TestCaseOfHl7SinkForTls {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 Sink test with tls Enabled");
         log.info("---------------------------------------------------------------------------------------------");
-
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +

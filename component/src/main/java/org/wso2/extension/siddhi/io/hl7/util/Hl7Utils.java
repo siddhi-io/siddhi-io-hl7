@@ -42,10 +42,10 @@ public class Hl7Utils {
     /**
      * Handles Validation Exceptions for hl7 Encoding types.
      *
-     * @param hl7Encoding      - Encoding type of hl7 receiving message
-     * @param hl7AckEncoding   - Encoding type of hl7 acknowledgement message
-     * @param siddhiAppName    - Defined siddhi app name
-     * @param streamID         - defined stream id
+     * @param hl7Encoding    - Encoding type of hl7 receiving message
+     * @param hl7AckEncoding - Encoding type of hl7 acknowledgement message
+     * @param siddhiAppName  - Defined siddhi app name
+     * @param streamID       - defined stream id
      */
     public static void validateEncodingType(String hl7Encoding, String hl7AckEncoding, String siddhiAppName,
                                             String streamID) {
@@ -75,7 +75,7 @@ public class Hl7Utils {
      * @param streamID              - defined stream id
      */
     public static void doTlsValidation(boolean tlsEnabled, String tlsKeystoreFilepath, String tlsKeystorePassphrase,
-                                String tlsKeystoreType, String siddhiAppName, String streamID) {
+                                       String tlsKeystoreType, String siddhiAppName, String streamID) {
 
         if (tlsEnabled) {
             try {
@@ -83,7 +83,7 @@ public class Hl7Utils {
                 KeyStore.getInstance(tlsKeystoreType);
                 KeystoreUtils.validateKeystoreForTlsSending(keyStore);
             } catch (FileNotFoundException e) {
-                throw new SiddhiAppCreationException("Failed to found the keystore file." +
+                throw new SiddhiAppCreationException("Failed to find the keystore file." +
                         " Please check the tls.keystore.filepath = " + tlsKeystoreFilepath + " defined in " +
                         siddhiAppName + ":" + streamID + ". ", e);
             } catch (IOException e) {
@@ -100,7 +100,6 @@ public class Hl7Utils {
             }
         }
     }
-
 
     /**
      * Used to parse the inputStream to String type

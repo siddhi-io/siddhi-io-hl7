@@ -151,7 +151,7 @@ define stream hl7stream(MSH1 string, MSH2 string, MSH3HD1 string, MSH4HD1 string
     </tr>
     <tr>
         <td style="vertical-align: top">hl7.encoding</td>
-        <td style="vertical-align: top; word-wrap: break-word">Encoding method of received hl7. This can be er7 or xml. User should define hl7 encoding type according to their mapping. <br>e.g., <br>If text mapping is used, then the hl7 encoding type should be er7. <br>If xml mapping is used, then the hl7 encoding type should be xml. </td>
+        <td style="vertical-align: top; word-wrap: break-word">Encoding method of received hl7. This can be er7 or xml. User should define hl7 encoding type according to their mapping. <br>e.g., <br>If <code>text</code> mapping is used, then the hl7 encoding type should be <code>er7</code>. <br>If <code>xml</code> mapping is used, then the hl7 encoding type should be <code>xml</code>. </td>
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
@@ -215,7 +215,7 @@ define stream hl7stream(MSH1 string, MSH2 string, MSH3HD1 string, MSH4HD1 string
     </tr>
     <tr>
         <td style="vertical-align: top">hl7.conformance.profile.file.path</td>
-        <td style="vertical-align: top; word-wrap: break-word">Path conformance profile file that is used to validate the incoming message. User should give the file path, if conformance profile is used to validate the message. </td>
+        <td style="vertical-align: top; word-wrap: break-word">The file path to the location of the conformance profile file that is used to validate the incoming message. User should give the file path, if conformance profile is used to validate the message. </td>
         <td style="vertical-align: top">Empty</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
@@ -246,5 +246,5 @@ hl7.encoding = 'xml',
 define stream hl7stream (MSH10 string, MSH3HD1 string); 
 
 ```
-<p style="word-wrap: break-word">This receives the HL7 messages nd send the acknowledgement message to the client using the MLLP protocol and custom xml mapping. <br>&nbsp;</p>
+<p style="word-wrap: break-word">This receives the HL7 messages and sends the acknowledgement message to the client using the MLLP protocol and custom xml mapping. <br>&nbsp;</p>
 

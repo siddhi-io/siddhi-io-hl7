@@ -87,19 +87,12 @@
             <artifactId>hapi-structures-v23</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>ca.uhn.hapi</groupId>
             <artifactId>hapi-hl7overhttp</artifactId>
         </dependency>
         <dependency>
             <groupId>ca.uhn.hapi</groupId>
             <artifactId>hapi-base</artifactId>
-            <version>${hapi.base.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -151,14 +144,16 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Export-Package>
-                            org.wso2.extension.siddhi.io.hl7,
-                            org.wso2.extension.siddhi.io.hl7.*
+                            org.wso2.extension.siddhi.io.hl7.*;version="${project.version}"
                         </Export-Package>
                         <Import-Package>
-                            *;resolution:=optional
+                            org.wso2.siddhi.annotation.*;version="${siddhi.version}",
+                            org.wso2.siddhi.core.*;version="${siddhi.version}",
+                            org.wso2.siddhi.query.*;version="${siddhi.version}",
+                            org.apache.log4j
                         </Import-Package>
                         <Private-Package>
-                            ca.uhn.hl7v2.*
+                            ca.uhn.hl7v2.*;version="${hapi.base.version}"
                         </Private-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                         <Include-Resource>

@@ -30,9 +30,11 @@ import ca.uhn.hl7v2.protocol.ReceivingApplicationException;
 import org.apache.log4j.Logger;
 import org.wso2.extension.siddhi.io.hl7.source.exception.Hl7SourceRuntimeException;
 import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
+import org.wso2.siddhi.query.api.definition.Attribute;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.locks.Condition;
@@ -55,8 +57,10 @@ public class Hl7ReceivingApp implements ReceivingApplication {
     private RuntimeProfile conformanceProfile;
     private String siddhiAppName;
     private String streamID;
+    private List<Attribute> attribute;
 
     public Hl7ReceivingApp() {
+
     }
 
     /**
@@ -70,10 +74,11 @@ public class Hl7ReceivingApp implements ReceivingApplication {
      * @param sourceEventListener - listens events
      * @param streamID            - the stream name of the siddhiApp
      * @param siddhiAppName       - the name of the siddhiApp
+     * @param attribute           - list of attributes defined in stream
      */
     public Hl7ReceivingApp(SourceEventListener sourceEventListener, String siddhiAppName, String streamID,
                            String hl7EncodeType, String hl7AckType, HapiContext hapiContext, boolean conformanceUsed,
-                           RuntimeProfile conformanceProfile) {
+                           RuntimeProfile conformanceProfile, List<Attribute> attribute) {
 
         this.sourceEventListener = sourceEventListener;
         this.siddhiAppName = siddhiAppName;
@@ -83,7 +88,7 @@ public class Hl7ReceivingApp implements ReceivingApplication {
         this.hapiContext = hapiContext;
         this.conformanceUsed = conformanceUsed;
         this.conformanceProfile = conformanceProfile;
-
+        this.attribute = attribute;
     }
 
     @Override
@@ -106,7 +111,8 @@ public class Hl7ReceivingApp implements ReceivingApplication {
         }
         if (hl7EncodeType.toUpperCase(Locale.ENGLISH).equals("ER7")) {
             String er7Msg = pipeParser.encode(message);
-            sourceEventListener.onEvent("payload: " + "'" + er7Msg + "'", null);
+            sourceEventListener.onEvent(attribute.get(0).getName() + ": '" + er7Msg + "'",
+                    null);
         } else {
             String xmlMsg = xmlParser.encode(message);
             sourceEventListener.onEvent(xmlMsg, null);
