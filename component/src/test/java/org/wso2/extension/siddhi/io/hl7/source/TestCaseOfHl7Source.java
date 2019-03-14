@@ -39,7 +39,6 @@ import org.wso2.siddhi.core.util.SiddhiTestHelper;
 import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.io.File;
-import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -404,12 +403,14 @@ public class TestCaseOfHl7Source {
         siddhiManager.shutdown();
     }
 
-    @Test(expectedExceptions = UnsupportedCharsetException.class)
+    @Test
     public void hl7ConsumerTestUnsupportedCharset() {
-
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 source test with given charset Type is invalid");
         log.info("---------------------------------------------------------------------------------------------");
+        log = Logger.getLogger(Source.class);
+        UnitTestAppender appender = new UnitTestAppender();
+        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@source ( type = 'hl7',\n" +
@@ -421,6 +422,7 @@ public class TestCaseOfHl7Source {
                 "define stream hl7stream (MSH10 string, MSH3HD1 string);\n";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
+        AssertJUnit.assertTrue(appender.getMessages().contains("UTF_8 Error while connecting at Source 'hl7'"));
         siddhiAppRuntime.shutdown();
     }
 
