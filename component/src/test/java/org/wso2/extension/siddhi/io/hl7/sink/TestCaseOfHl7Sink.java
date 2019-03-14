@@ -25,7 +25,6 @@ import ca.uhn.hl7v2.parser.PipeParser;
 import ca.uhn.hl7v2.parser.XMLParser;
 import org.apache.log4j.Logger;
 import org.testng.AssertJUnit;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.io.hl7.util.TestUtil;
@@ -37,7 +36,6 @@ import org.wso2.siddhi.core.stream.output.sink.Sink;
 import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.io.File;
-import java.nio.charset.UnsupportedCharsetException;
 
 /**
  * Class implementing the Test cases for Hl7 Sink.
@@ -601,12 +599,14 @@ public class TestCaseOfHl7Sink {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test(expectedExceptions = UnsupportedCharsetException.class)
+    @Test
     public void hl7PublishTestUnsupportedCharset() {
-
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 Sink test with given charset Type is invalid.");
         log.info("---------------------------------------------------------------------------------------------");
+        log = Logger.getLogger(Sink.class);
+        UnitTestAppender appender = new UnitTestAppender();
+        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
@@ -617,8 +617,8 @@ public class TestCaseOfHl7Sink {
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
+        AssertJUnit.assertTrue(appender.getMessages().contains("UTF_8 Error while connecting at Sink 'hl7'"));
         siddhiAppRuntime.shutdown();
-
     }
 
     @Test
