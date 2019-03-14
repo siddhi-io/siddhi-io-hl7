@@ -31,6 +31,15 @@
     <artifactId>siddhi-io-hl7-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>Siddhi I/O hl7</name>
+
+    <scm>
+        <connection>scm:git:https://github.com/wso2-extensions/siddhi-io-hl7.git</connection>
+        <url>https://github.com/wso2-extensions/siddhi-io-hl7.git</url>
+        <developerConnection>scm:git:https://github.com/wso2-extensions/siddhi-io-hl7.git
+        </developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
