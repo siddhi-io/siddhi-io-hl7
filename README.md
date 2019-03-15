@@ -11,6 +11,7 @@ Find some useful links below:
 * <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-hl7/issues">Issue tracker</a>
 
 
+## Latest API Docs
 
 
 ## How to use
@@ -27,11 +28,13 @@ Find some useful links below:
 
 ```
      <dependency>
-        <groupId>org.wso2.extension.siddhi.io.</groupId>
+        <groupId>org.wso2.extension.siddhi.io.hl7</groupId>
         <artifactId>siddhi-io-hl7</artifactId>
         <version>x.x.x</version>
      </dependency>
 ```
+
+## Jenkins Build Status
 
 
 ## Features
