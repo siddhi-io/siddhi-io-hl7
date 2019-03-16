@@ -35,6 +35,14 @@ Find some useful links below:
 
 ## Jenkins Build Status
 
+---
+
+|  Branch | Build Status |
+| :------ |:------------ | 
+| master  | [![Build Status](https://wso2.org/jenkins/job/siddhi/job/siddhi-io-hl7/badge/icon)](https://wso2.org/jenkins/job/siddhi/job/siddhi-io-hl7/) |
+
+---
+
 ## Features
 
 **hl7(Sink)**
