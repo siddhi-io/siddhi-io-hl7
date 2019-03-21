@@ -46,14 +46,10 @@ Find some useful links below:
 
 ## Features
 
-**hl7(Sink)**
-
-The hl7 sink publishes the hl7 messages using MLLP protocol.
+* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-hl7/api/latest/#hl7-sink">hl7</a>*<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#sink">(Sink)</a>*<br><div style="padding-left: 1em;"><p>The hl7 sink publishes the hl7 messages using MLLP protocol.</p></div>
 
 
-**hl7(Source)**
-
-The hl7 source consumes the hl7 messages using MLLP protocol.
+* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-hl7/api/latest/#hl7-source">hl7</a>*<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#source">(Source)</a>*<br><div style="padding-left: 1em;"><p>The hl7 source consumes the hl7 messages using MLLP protocol.</p></div>
 
 
 ## How to Contribute

@@ -1,10 +1,10 @@
-site_name: Siddhi-IO-Hl7
+site_name: Siddhi IO Hl7
 site_description: Siddhi IO Hl7 Extension
 site_author: WSO2
 site_url: https://wso2-extensions.github.io/siddhi-io-hl7/
-Extra_css:
+extra_css:
   - stylesheets/extra.css
-Extra_javascript:
+extra_javascript:
   - javascripts/extra.js
 repo_name: Siddhi-IO-hl7
 repo_url: https://github.com/wso2-extensions/siddhi-io-hl7
@@ -25,7 +25,9 @@ extra:
       link: https://github.com/wso2/siddhi
     - type: linkedin
       link: https://www.linkedin.com/groups/13553064
-Pages:
+pages:
   - Welcome: index.md
   - API Docs:
+      - 1.0.0-SNAPSHOT: api/1.0.0-SNAPSHOT.md
+      - latest: api/latest.md
   - License: license.md
