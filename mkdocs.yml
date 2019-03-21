@@ -26,8 +26,7 @@ extra:
     - type: linkedin
       link: https://www.linkedin.com/groups/13553064
 pages:
-  - Welcome: index.md
-  - API Docs:
-      - 1.0.0-SNAPSHOT: api/1.0.0-SNAPSHOT.md
-      - latest: api/latest.md
-  - License: license.md
+- Welcome: index.md
+- API Docs:
+  - latest: api/latest.md
+- License: license.md
