@@ -27,7 +27,7 @@
     </modules>
     <groupId>org.wso2.extension.siddhi.io.hl7</groupId>
     <artifactId>siddhi-io-hl7-parent</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3-SNAPSHOT</version>
     <name>Siddhi I/O hl7</name>
 
     <scm>
@@ -35,7 +35,7 @@
         <url>https://github.com/wso2-extensions/siddhi-io-hl7.git</url>
         <developerConnection>scm:git:https://github.com/wso2-extensions/siddhi-io-hl7.git
         </developerConnection>
-        <tag>v1.0.2</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencyManagement>
