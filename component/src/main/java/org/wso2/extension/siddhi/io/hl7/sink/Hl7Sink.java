@@ -29,28 +29,30 @@ import ca.uhn.hl7v2.llp.LLPException;
 import ca.uhn.hl7v2.llp.MinLowerLayerProtocol;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.Parser;
+import io.siddhi.annotation.Example;
+import io.siddhi.annotation.Extension;
+import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.util.DataType;
+import io.siddhi.core.config.SiddhiAppContext;
+import io.siddhi.core.exception.ConnectionUnavailableException;
+import io.siddhi.core.stream.ServiceDeploymentInfo;
+import io.siddhi.core.stream.output.sink.Sink;
+import io.siddhi.core.util.config.ConfigReader;
+import io.siddhi.core.util.snapshot.state.State;
+import io.siddhi.core.util.snapshot.state.StateFactory;
+import io.siddhi.core.util.transport.DynamicOptions;
+import io.siddhi.core.util.transport.OptionHolder;
+import io.siddhi.query.api.definition.StreamDefinition;
+import io.siddhi.query.api.exception.SiddhiAppValidationException;
 import org.apache.log4j.Logger;
 import org.wso2.extension.siddhi.io.hl7.sink.exception.Hl7SinkRuntimeException;
 import org.wso2.extension.siddhi.io.hl7.util.Hl7Constants;
 import org.wso2.extension.siddhi.io.hl7.util.Hl7Utils;
-import org.wso2.siddhi.annotation.Example;
-import org.wso2.siddhi.annotation.Extension;
-import org.wso2.siddhi.annotation.Parameter;
-import org.wso2.siddhi.annotation.util.DataType;
-import org.wso2.siddhi.core.config.SiddhiAppContext;
-import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
-import org.wso2.siddhi.core.stream.output.sink.Sink;
-import org.wso2.siddhi.core.util.config.ConfigReader;
-import org.wso2.siddhi.core.util.transport.DynamicOptions;
-import org.wso2.siddhi.core.util.transport.OptionHolder;
-import org.wso2.siddhi.query.api.definition.StreamDefinition;
-import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Locale;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -188,14 +190,19 @@ public class Hl7Sink extends Sink {
     }
 
     @Override
+    protected ServiceDeploymentInfo exposeServiceDeploymentInfo() {
+        return null;
+    }
+
+    @Override
     public String[] getSupportedDynamicOptions() {
 
         return new String[0];
     }
 
     @Override
-    protected void init(StreamDefinition streamDefinition, OptionHolder optionHolder, ConfigReader configReader,
-                        SiddhiAppContext siddhiAppContext) {
+    protected StateFactory init(StreamDefinition streamDefinition, OptionHolder optionHolder, ConfigReader configReader,
+                                SiddhiAppContext siddhiAppContext) {
 
         this.siddhiAppName = siddhiAppContext.getName();
         this.streamID = streamDefinition.getId();
@@ -220,10 +227,11 @@ public class Hl7Sink extends Sink {
         Hl7Utils.validateEncodingType(hl7Encoding, hl7AckEncoding, siddhiAppName, streamID);
         Hl7Utils.doTlsValidation(tlsEnabled, tlsKeystoreFilepath, tlsKeystorePassphrase, tlsKeystoreType,
                 siddhiAppName, streamID);
+        return null;
     }
 
     @Override
-    public void publish(Object payload, DynamicOptions dynamicOptions) {
+    public void publish(Object payload, DynamicOptions dynamicOptions, State state) {
 
         Initiator initiator = connection.getInitiator();
         String hl7Message = (String) payload;
@@ -302,17 +310,6 @@ public class Hl7Sink extends Sink {
     @Override
     public void destroy() {
         //Not applicable
-    }
-
-    @Override
-    public Map<String, Object> currentState() {
-
-        return null;
-    }
-
-    @Override
-    public void restoreState(Map<String, Object> map) {
-        //No state to restore
     }
 
     private void getValuesFromUri() {

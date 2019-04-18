@@ -21,16 +21,16 @@ package org.wso2.extension.siddhi.io.hl7.sink;
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.PipeParser;
+import io.siddhi.core.SiddhiAppRuntime;
+import io.siddhi.core.SiddhiManager;
+import io.siddhi.core.exception.SiddhiAppCreationException;
+import io.siddhi.core.stream.input.InputHandler;
 import org.apache.log4j.Logger;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.io.hl7.util.TestUtil;
 import org.wso2.extension.siddhi.io.hl7.util.UnitTestAppender;
-import org.wso2.siddhi.core.SiddhiAppRuntime;
-import org.wso2.siddhi.core.SiddhiManager;
-import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
-import org.wso2.siddhi.core.stream.input.InputHandler;
 
 import java.io.File;
 
@@ -70,7 +70,7 @@ public class TestCaseOfHl7SinkForTls {
                 "uri = 'hl7://localhost:5019', " +
                 "hl7.encoding = 'er7', " +
                 "tls.enabled = 'true', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         InputHandler stream = siddhiAppRuntime.getInputHandler("hl7stream");
@@ -117,7 +117,7 @@ public class TestCaseOfHl7SinkForTls {
                 "tls.enabled = 'true', " +
                 "tls.keystore.filepath = 'src/test/resources/keystore.jks', " +
                 "tls.keystore.passphrase = 'changeit', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
 
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
@@ -154,7 +154,7 @@ public class TestCaseOfHl7SinkForTls {
                 "tls.enabled = 'true', " +
                 "tls.keystore.filepath = 'src/test/resources/security/keystore.jks', " +
                 "tls.keystore.passphrase = 'changeit', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         InputHandler stream = siddhiAppRuntime.getInputHandler("hl7stream");
@@ -200,7 +200,7 @@ public class TestCaseOfHl7SinkForTls {
                 "tls.enabled = 'true', " +
                 "tls.keystore.filepath = 'src/test/resources/security/invalid.jks', " +
                 "tls.keystore.passphrase = 'changeit', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
@@ -221,7 +221,7 @@ public class TestCaseOfHl7SinkForTls {
                 "tls.enabled = 'true', " +
                 "tls.keystore.filepath = 'src/test/resources/security/symmetrickey.jks', " +
                 "tls.keystore.passphrase = 'trustpassword', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
@@ -242,7 +242,7 @@ public class TestCaseOfHl7SinkForTls {
                 "tls.enabled = 'true', " +
                 "tls.keystore.filepath = 'src/keystore.jks', " +
                 "tls.keystore.passphrase = 'changeit', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
@@ -263,7 +263,7 @@ public class TestCaseOfHl7SinkForTls {
                 "tls.enabled = 'true', " +
                 "tls.keystore.filepath = 'src/test/resources/security/keystore.jks', " +
                 "tls.keystore.passphrase = 'chaaangeit', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
@@ -284,7 +284,7 @@ public class TestCaseOfHl7SinkForTls {
                 "tls.enabled = 'true', " +
                 "tls.keystore.filepath = 'src/test/resources/security/kk.js', " +
                 "tls.keystore.passphrase = 'chaaangeit', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
@@ -306,7 +306,7 @@ public class TestCaseOfHl7SinkForTls {
                 "tls.keystore.type = 'vv', " +
                 "tls.keystore.filepath = 'src/test/resources/security/keystore.jks', " +
                 "tls.keystore.passphrase = 'changeit', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
