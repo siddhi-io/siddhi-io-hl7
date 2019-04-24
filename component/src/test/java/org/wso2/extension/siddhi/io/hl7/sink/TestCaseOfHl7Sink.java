@@ -23,17 +23,17 @@ import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.DefaultXMLParser;
 import ca.uhn.hl7v2.parser.PipeParser;
 import ca.uhn.hl7v2.parser.XMLParser;
+import io.siddhi.core.SiddhiAppRuntime;
+import io.siddhi.core.SiddhiManager;
+import io.siddhi.core.stream.input.InputHandler;
+import io.siddhi.core.stream.output.sink.Sink;
+import io.siddhi.query.api.exception.SiddhiAppValidationException;
 import org.apache.log4j.Logger;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.io.hl7.util.TestUtil;
 import org.wso2.extension.siddhi.io.hl7.util.UnitTestAppender;
-import org.wso2.siddhi.core.SiddhiAppRuntime;
-import org.wso2.siddhi.core.SiddhiManager;
-import org.wso2.siddhi.core.stream.input.InputHandler;
-import org.wso2.siddhi.core.stream.output.sink.Sink;
-import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.io.File;
 
@@ -72,7 +72,7 @@ public class TestCaseOfHl7Sink {
                 "@sink(type='hl7', " +
                 "uri = 'localhost:5011', " +
                 "hl7.encoding = 'er7', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         hl7SinkTestUtil.connect(5011, count, eventArrived, false, 3);
@@ -382,7 +382,7 @@ public class TestCaseOfHl7Sink {
                 "uri = 'hl7://localhost:5011', " +
                 "hl7.encoding = 'er7', " +
                 "hl7.ack.encoding = 'xml', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);  ";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         InputHandler stream = siddhiAppRuntime.getInputHandler("hl7stream");
@@ -418,7 +418,7 @@ public class TestCaseOfHl7Sink {
                 "uri = 'hl7://localhost:5011', " +
                 "hl7.encoding = 'er7', " +
                 "charset = 'ISO-8859-2', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         InputHandler stream = siddhiAppRuntime.getInputHandler("hl7stream");
@@ -454,7 +454,7 @@ public class TestCaseOfHl7Sink {
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
                 "uri = 'hl7://localhost:5011', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiManager.shutdown();
@@ -474,7 +474,7 @@ public class TestCaseOfHl7Sink {
                 "@sink(type='hl7', " +
                 "uri = 'localhost:5015', " +
                 "hl7.encoding = 'er7', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
 
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
@@ -495,7 +495,7 @@ public class TestCaseOfHl7Sink {
                 "@sink(type='hl7', " +
                 "uri = 'h-l7://localhost:5012', " +
                 "hl7.encoding = 'er7', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         siddhiManager.createSiddhiAppRuntime(siddhiApp);
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
@@ -520,7 +520,7 @@ public class TestCaseOfHl7Sink {
                 "uri = 'localhost:5011', " +
                 "hl7.encoding = 'er7', " +
                 "charset = 'UTF-16', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
 
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
@@ -552,7 +552,7 @@ public class TestCaseOfHl7Sink {
                 "uri = 'localhost:5011', " +
                 "hl7.encoding = 'er7', " +
                 "hl7.timeout = '5000', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         hl7SinkTestUtil.connect(5011, count, eventArrived, false, 3);
@@ -613,7 +613,7 @@ public class TestCaseOfHl7Sink {
                 "uri = 'hl7://localhost:5011', " +
                 "hl7.encoding = 'er7', " +
                 "charset = 'UTF_8', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
@@ -635,7 +635,7 @@ public class TestCaseOfHl7Sink {
                 "@sink(type='hl7', " +
                 "uri = 'localhost:5011', " +
                 "hl7.encoding = 'xml', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         hl7SinkTestUtil.connect(5011, count, eventArrived, false, 3);
@@ -667,7 +667,7 @@ public class TestCaseOfHl7Sink {
                 "@sink(type='hl7', " +
                 "uri = 'localhost:5011', " +
                 "hl7.encoding = 'exml', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         hl7SinkTestUtil.connect(5011, count, eventArrived, false, 3);
@@ -697,7 +697,7 @@ public class TestCaseOfHl7Sink {
                 "@sink(type='hl7', " +
                 "uri = 'localhost:5011', " +
                 "hl7.encoding = 'exml', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         hl7SinkTestUtil.connect(5011, count, eventArrived, false, 3);
@@ -726,7 +726,7 @@ public class TestCaseOfHl7Sink {
                 "@sink(type='hl7', " +
                 "uri = 'localhost:5011', " +
                 "hl7.encoding = 'er7', " +
-                "@map(type = 'text', @payload(\"{{payload}}\")))" +
+                "@map(type = 'text', @payload(\"{{{payload}}}\")))" +
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         hl7SinkTestUtil.connect(5011, count, eventArrived, false, 3);

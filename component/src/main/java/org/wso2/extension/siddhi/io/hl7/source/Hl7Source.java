@@ -27,28 +27,29 @@ import ca.uhn.hl7v2.conf.spec.RuntimeProfile;
 import ca.uhn.hl7v2.hoh.sockets.CustomCertificateTlsSocketFactory;
 import ca.uhn.hl7v2.hoh.util.HapiSocketTlsFactoryWrapper;
 import ca.uhn.hl7v2.llp.MinLowerLayerProtocol;
-
+import io.siddhi.annotation.Example;
+import io.siddhi.annotation.Extension;
+import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.util.DataType;
+import io.siddhi.core.config.SiddhiAppContext;
+import io.siddhi.core.exception.ConnectionUnavailableException;
+import io.siddhi.core.exception.SiddhiAppCreationException;
+import io.siddhi.core.stream.ServiceDeploymentInfo;
+import io.siddhi.core.stream.input.source.Source;
+import io.siddhi.core.stream.input.source.SourceEventListener;
+import io.siddhi.core.util.config.ConfigReader;
+import io.siddhi.core.util.snapshot.state.State;
+import io.siddhi.core.util.snapshot.state.StateFactory;
+import io.siddhi.core.util.transport.OptionHolder;
+import io.siddhi.query.api.definition.Attribute;
 import org.apache.log4j.Logger;
 import org.wso2.extension.siddhi.io.hl7.util.Hl7Constants;
 import org.wso2.extension.siddhi.io.hl7.util.Hl7Utils;
-import org.wso2.siddhi.annotation.Example;
-import org.wso2.siddhi.annotation.Extension;
-import org.wso2.siddhi.annotation.Parameter;
-import org.wso2.siddhi.annotation.util.DataType;
-import org.wso2.siddhi.core.config.SiddhiAppContext;
-import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
-import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
-import org.wso2.siddhi.core.stream.input.source.Source;
-import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
-import org.wso2.siddhi.core.util.config.ConfigReader;
-import org.wso2.siddhi.core.util.transport.OptionHolder;
-import org.wso2.siddhi.query.api.definition.Attribute;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Hl7 Source Implementation
@@ -176,9 +177,9 @@ public class Hl7Source extends Source {
     private List<Attribute> attribute;
 
     @Override
-    public void init(SourceEventListener sourceEventListener, OptionHolder optionHolder,
-                     String[] requestedTransportPropertyNames, ConfigReader configReader,
-                     SiddhiAppContext siddhiAppContext) {
+    public StateFactory init(SourceEventListener sourceEventListener, OptionHolder optionHolder,
+                             String[] requestedTransportPropertyNames, ConfigReader configReader,
+                             SiddhiAppContext siddhiAppContext) {
 
         this.sourceEventListener = sourceEventListener;
         this.streamID = sourceEventListener.getStreamDefinition().getId();
@@ -210,6 +211,13 @@ public class Hl7Source extends Source {
         }
         Hl7Utils.doTlsValidation(tlsEnabled, tlsKeystoreFilepath, tlsKeystorePassphrase, tlsKeystoreType,
                 siddhiAppName, streamID);
+        return null;
+    }
+
+    @Override
+    protected ServiceDeploymentInfo exposeServiceDeploymentInfo() {
+
+        return null;
     }
 
     @Override
@@ -219,7 +227,7 @@ public class Hl7Source extends Source {
     }
 
     @Override
-    public void connect(ConnectionCallback connectionCallback) throws ConnectionUnavailableException {
+    public void connect(ConnectionCallback connectionCallback, State state) throws ConnectionUnavailableException {
 
         HapiContext hapiContext = new DefaultHapiContext();
         MinLowerLayerProtocol mllp = new MinLowerLayerProtocol();
@@ -267,17 +275,6 @@ public class Hl7Source extends Source {
     public void resume() {
 
         hl7ReceivingApp.resume();
-    }
-
-    @Override
-    public Map<String, Object> currentState() {
-
-        return null;
-    }
-
-    @Override
-    public void restoreState(Map<String, Object> map) {
-        //No state to restore
     }
 
     private RuntimeProfile getConformanceProfile(String profileFileName) {

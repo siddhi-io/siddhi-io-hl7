@@ -20,8 +20,8 @@ package org.wso2.extension.siddhi.io.hl7.util;
 
 import ca.uhn.hl7v2.hoh.util.IOUtils;
 import ca.uhn.hl7v2.hoh.util.KeystoreUtils;
-import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
-import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
+import io.siddhi.core.exception.SiddhiAppCreationException;
+import io.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -20,17 +20,17 @@ package org.wso2.extension.siddhi.io.hl7.source;
 
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.parser.PipeParser;
+import io.siddhi.core.SiddhiAppRuntime;
+import io.siddhi.core.SiddhiManager;
+import io.siddhi.core.event.Event;
+import io.siddhi.core.exception.SiddhiAppCreationException;
+import io.siddhi.core.stream.input.InputHandler;
+import io.siddhi.core.stream.output.StreamCallback;
 import org.apache.log4j.Logger;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.io.hl7.util.TestUtil;
-import org.wso2.siddhi.core.SiddhiAppRuntime;
-import org.wso2.siddhi.core.SiddhiManager;
-import org.wso2.siddhi.core.event.Event;
-import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
-import org.wso2.siddhi.core.stream.input.InputHandler;
-import org.wso2.siddhi.core.stream.output.StreamCallback;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class TestCaseOfHl7SourceForTls {
                 "uri = 'localhost:4000', " +
                 "hl7.encoding = 'er7', " +
                 "tls.enabled = 'true', " +
-                "@map(type = 'text', @payload(\"{{payload}}\"))) " +
+                "@map(type = 'text', @payload(\"{{{payload}}}\"))) " +
                 "define stream hl7sinkStream(payload string);";
         SiddhiAppRuntime executionPlanRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp1);
         InputHandler stream = executionPlanRuntime.getInputHandler("hl7sinkStream");
@@ -158,7 +158,7 @@ public class TestCaseOfHl7SourceForTls {
                 "tls.enabled = 'true', " +
                 "tls.keystore.filepath = 'src/test/resources/keystore.jks', " +
                 "tls.keystore.passphrase = 'changeit', " +
-                "@map(type = 'text', @payload(\"{{payload}}\"))) " +
+                "@map(type = 'text', @payload(\"{{{payload}}}\"))) " +
                 "define stream hl7sinkStream(payload string);";
         SiddhiAppRuntime executionPlanRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp1);
         InputHandler stream = executionPlanRuntime.getInputHandler("hl7sinkStream");
