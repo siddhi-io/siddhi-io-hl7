@@ -1,7 +1,7 @@
 ﻿siddhi-io-hl7
 ======================================
 
-The **siddhi-io-hl7 extension** is an extension to Siddhi that can be used to transmit  <a target="_blank" href="http://www.hl7.org/about/index.cfm?ref=common">Health Level 7 International</a> (HL7) messages. This uses the HAPI parser that supports HL7 V 2.x messages, to provide HL7 support.
+The **siddhi-io-hl7 extension** transmits  <a target="_blank" href="http://www.hl7.org/about/index.cfm?ref=common">Health Level 7 International</a> (HL7) messages. This uses the HAPI parser that supports HL7 V 2.x messages, to provide HL7 support.
 
 Find some useful links below:
 
