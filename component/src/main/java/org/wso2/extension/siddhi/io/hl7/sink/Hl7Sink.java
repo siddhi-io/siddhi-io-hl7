@@ -135,7 +135,7 @@ import java.util.concurrent.TimeUnit;
                                 "@sink(type = 'hl7', \n" +
                                 "uri = 'localhost:1080', \n" +
                                 "hl7.encoding = 'er7', \n" +
-                                "@map(type = 'text', @payload(\"{{payload}}\"))) \n" +
+                                "@map(type = 'text', @payload(\"{{{payload}}}\"))) \n" +
                                 "define stream hl7stream(payload string); \n"
                         ,
                         description = "This publishes the HL7 messages in the 'ER7' format, and receives and logs " +
