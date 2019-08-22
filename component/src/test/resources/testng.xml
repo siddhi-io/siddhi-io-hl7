@@ -19,10 +19,10 @@
 <suite name="Siddhi-Io-Hl7-Test-Suite">
     <test name="Siddhi-io-hl7-tests" enabled="true" preserve-order="true" parallel="false">
         <classes>
-            <class name="org.wso2.extension.siddhi.io.hl7.sink.TestCaseOfHl7Sink"/>
-            <class name="org.wso2.extension.siddhi.io.hl7.sink.TestCaseOfHl7SinkForTls"/>
-            <class name="org.wso2.extension.siddhi.io.hl7.source.TestCaseOfHl7Source"/>
-            <class name="org.wso2.extension.siddhi.io.hl7.source.TestCaseOfHl7SourceForTls"/>
+            <class name="io.siddhi.extension.io.hl7.sink.TestCaseOfHl7Sink"/>
+            <class name="io.siddhi.extension.io.hl7.sink.TestCaseOfHl7SinkForTls"/>
+            <class name="io.siddhi.extension.io.hl7.source.TestCaseOfHl7Source"/>
+            <class name="io.siddhi.extension.io.hl7.source.TestCaseOfHl7SourceForTls"/>
         </classes>
     </test>
 </suite>
