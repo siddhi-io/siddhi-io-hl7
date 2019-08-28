@@ -31,9 +31,9 @@
     <name>Siddhi I/O hl7</name>
 
     <scm>
-        <connection>scm:git:https://github.com/wso2-extensions/siddhi-io-hl7.git</connection>
-        <url>https://github.com/wso2-extensions/siddhi-io-hl7.git</url>
-        <developerConnection>scm:git:https://github.com/wso2-extensions/siddhi-io-hl7.git
+        <connection>scm:git:https://github.com/siddhi-io/siddhi-io-hl7.git</connection>
+        <url>https://github.com/siddhi-io/siddhi-io-hl7.git</url>
+        <developerConnection>scm:git:https://github.com/siddhi-io/siddhi-io-hl7.git
         </developerConnection>
         <tag>HEAD</tag>
     </scm>
