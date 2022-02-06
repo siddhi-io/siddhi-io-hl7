@@ -32,7 +32,9 @@ import io.siddhi.core.util.SiddhiTestHelper;
 import io.siddhi.extension.io.hl7.util.TestUtil;
 import io.siddhi.extension.io.hl7.util.UnitTestAppender;
 import io.siddhi.query.api.exception.SiddhiAppValidationException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
@@ -49,7 +51,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class TestCaseOfHl7Source {
 
-    private static Logger log = Logger.getLogger(TestCaseOfHl7Source.class);
+    private static final Logger log = (Logger) LogManager.getLogger(TestCaseOfHl7Source.class);
     private AtomicInteger count = new AtomicInteger();
     private volatile boolean eventArrived;
     private List<String> receivedEvent;
@@ -408,9 +410,11 @@ public class TestCaseOfHl7Source {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 source test with given charset Type is invalid");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Source.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        final Logger logger = (Logger) LogManager.getRootLogger();
+        logger.setLevel(Level.ALL);
+        logger.addAppender(appender);
+        appender.start();
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@source ( type = 'hl7',\n" +
@@ -422,8 +426,10 @@ public class TestCaseOfHl7Source {
                 "define stream hl7stream (MSH10 string, MSH3HD1 string);\n";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
-        AssertJUnit.assertTrue(appender.getMessages().contains("UTF_8 Error while connecting at Source 'hl7'"));
+        AssertJUnit.assertTrue(((UnitTestAppender) logger.getAppenders().
+                get("UnitTestAppender")).getMessages().contains("UTF_8 Error while connecting at Source 'hl7'"));
         siddhiAppRuntime.shutdown();
+        logger.removeAppender(appender);
     }
 
     @Test
@@ -432,9 +438,11 @@ public class TestCaseOfHl7Source {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 source test with unrecognized structure of received message - ");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Hl7ExceptionHandler.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        final Logger logger = (Logger) LogManager.getRootLogger();
+        logger.setLevel(Level.ALL);
+        logger.addAppender(appender);
+        appender.start();
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@source ( type = 'hl7',\n" +
@@ -476,10 +484,12 @@ public class TestCaseOfHl7Source {
         stream.send(new Object[]{payLoadER71});
         stream.send(new Object[]{payLoadER72});
         SiddhiTestHelper.waitForEvents(waitTime, 2, count, timeout);
-        AssertJUnit.assertTrue(appender.getMessages().contains("Some error occurred while process the message." +
+        AssertJUnit.assertTrue(((UnitTestAppender) logger.getAppenders().
+                get("UnitTestAppender")).getMessages().contains("Some error occurred while process the message." +
                 " Error message:"));
         executionPlanRuntime.shutdown();
         siddhiAppRuntime.shutdown();
+        logger.removeAppender(appender);
     }
 
     @Test(expectedExceptions = SiddhiAppValidationException.class)
@@ -838,9 +848,11 @@ public class TestCaseOfHl7Source {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 source to test with conformance profile exception");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Hl7ReceivingApp.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        final Logger logger = (Logger) LogManager.getRootLogger();
+        logger.setLevel(Level.ALL);
+        logger.addAppender(appender);
+        appender.start();
         receivedEvent = new ArrayList<>(1);
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
@@ -894,10 +906,12 @@ public class TestCaseOfHl7Source {
         AssertJUnit.assertEquals(1, count.get());
         AssertJUnit.assertTrue(eventArrived);
         AssertJUnit.assertEquals(expected, receivedEvent);
-        AssertJUnit.assertTrue(appender.getMessages().contains("The given conformance Profile file is not" +
+        AssertJUnit.assertTrue(((UnitTestAppender) logger.getAppenders().
+                get("UnitTestAppender")).getMessages().contains("The given conformance Profile file is not" +
                 " supported. Hence, dropping the validation."));
         siddhiAppRuntime.shutdown();
         executionPlanRuntime.shutdown();
+        logger.removeAppender(appender);
     }
 
     @Test

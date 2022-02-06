@@ -30,7 +30,8 @@ import ca.uhn.hl7v2.protocol.ReceivingApplicationException;
 import io.siddhi.core.stream.input.source.SourceEventListener;
 import io.siddhi.extension.io.hl7.source.exception.Hl7SourceRuntimeException;
 import io.siddhi.query.api.definition.Attribute;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -45,7 +46,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Hl7ReceivingApp implements ReceivingApplication {
 
-    private static final Logger log = Logger.getLogger(Hl7ReceivingApp.class);
+    private static final Logger log = LogManager.getLogger(Hl7ReceivingApp.class);
     private SourceEventListener sourceEventListener;
     private String hl7EncodeType;
     private String hl7AckType;

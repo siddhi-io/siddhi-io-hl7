@@ -47,7 +47,8 @@ import io.siddhi.extension.io.hl7.util.Hl7Constants;
 import io.siddhi.extension.io.hl7.util.Hl7Utils;
 import io.siddhi.query.api.definition.StreamDefinition;
 import io.siddhi.query.api.exception.SiddhiAppValidationException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URI;
@@ -167,7 +168,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Hl7Sink extends Sink {
 
-    private static final Logger log = Logger.getLogger(Hl7Sink.class);
+    private static final Logger log = LogManager.getLogger(Hl7Sink.class);
     private boolean tlsEnabled;
     private String charset;
     private String hl7Encoding;
