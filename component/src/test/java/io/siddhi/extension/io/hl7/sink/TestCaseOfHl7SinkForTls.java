@@ -27,7 +27,9 @@ import io.siddhi.core.exception.SiddhiAppCreationException;
 import io.siddhi.core.stream.input.InputHandler;
 import io.siddhi.extension.io.hl7.util.TestUtil;
 import io.siddhi.extension.io.hl7.util.UnitTestAppender;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -41,7 +43,7 @@ public class TestCaseOfHl7SinkForTls {
 
     private volatile int count;
     private volatile boolean eventArrived;
-    private static Logger log = Logger.getLogger(TestCaseOfHl7SinkForTls.class);
+    private static final Logger log = (Logger) LogManager.getLogger(TestCaseOfHl7SinkForTls.class);
     private PipeParser pipeParser = new PipeParser();
     private TestUtil testUtil = new TestUtil();
     private Hl7SinkTestUtil hl7SinkTestUtil;
@@ -106,9 +108,11 @@ public class TestCaseOfHl7SinkForTls {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 Sink test with tls Enabled and tls of source not enabled");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Hl7Sink.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        final Logger logger = (Logger) LogManager.getRootLogger();
+        logger.setLevel(Level.ALL);
+        logger.addAppender(appender);
+        appender.start();
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
@@ -133,9 +137,11 @@ public class TestCaseOfHl7SinkForTls {
         } catch (InterruptedException e) {
             AssertJUnit.fail("interrupted");
         }
-        AssertJUnit.assertTrue(appender.getMessages().contains("Interruption occurred while sending the message " +
+        AssertJUnit.assertTrue(((UnitTestAppender) logger.getAppenders().
+                get("UnitTestAppender")).getMessages().contains("Interruption occurred while sending the message " +
                 "from stream: TestExecutionPlan:hl7stream"));
         siddhiAppRuntime.shutdown();
+        logger.removeAppender(appender);
     }
 
     @Test
