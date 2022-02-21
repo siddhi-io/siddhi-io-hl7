@@ -179,9 +179,6 @@
                             io.siddhi.core.*;version="${siddhi.version.range}",
                             io.siddhi.query.*;version="${siddhi.version.range}"
                         </Import-Package>
-                        <Private-Package>
-                            ca.uhn.hl7v2.*;version="${hapi.base.version}"
-                        </Private-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                         <Include-Resource>
                             META-INF=target/classes/META-INF
