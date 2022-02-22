@@ -44,7 +44,8 @@ import io.siddhi.core.util.transport.OptionHolder;
 import io.siddhi.extension.io.hl7.util.Hl7Constants;
 import io.siddhi.extension.io.hl7.util.Hl7Utils;
 import io.siddhi.query.api.definition.Attribute;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -158,7 +159,7 @@ import java.util.List;
 )
 public class Hl7Source extends Source {
 
-    private static final Logger log = Logger.getLogger(Hl7Source.class);
+    private static final Logger log = LogManager.getLogger(Hl7Source.class);
     private SourceEventListener sourceEventListener;
     private int port;
     private boolean tlsEnabled;

@@ -26,11 +26,12 @@ import ca.uhn.hl7v2.parser.XMLParser;
 import io.siddhi.core.SiddhiAppRuntime;
 import io.siddhi.core.SiddhiManager;
 import io.siddhi.core.stream.input.InputHandler;
-import io.siddhi.core.stream.output.sink.Sink;
 import io.siddhi.extension.io.hl7.util.TestUtil;
 import io.siddhi.extension.io.hl7.util.UnitTestAppender;
 import io.siddhi.query.api.exception.SiddhiAppValidationException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -42,7 +43,7 @@ import java.io.File;
  */
 public class TestCaseOfHl7Sink {
 
-    private static Logger log = Logger.getLogger(TestCaseOfHl7Sink.class);
+    private static final Logger log = (Logger) LogManager.getLogger(TestCaseOfHl7Sink.class);
     private volatile int count;
     private volatile boolean eventArrived;
     private Hl7SinkTestUtil hl7SinkTestUtil;
@@ -466,9 +467,11 @@ public class TestCaseOfHl7Sink {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 sink test with a unavailable server.");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Sink.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        final Logger logger = (Logger) LogManager.getRootLogger();
+        logger.setLevel(Level.ALL);
+        logger.addAppender(appender);
+        appender.start();
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
@@ -480,8 +483,10 @@ public class TestCaseOfHl7Sink {
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
         Thread.sleep(10000);
-        AssertJUnit.assertTrue(appender.getMessages().contains("Failed to connect with the HL7 server, check"));
+        AssertJUnit.assertTrue(((UnitTestAppender) logger.getAppenders().
+                get("UnitTestAppender")).getMessages().contains("Failed to connect with the HL7 server, check"));
         siddhiAppRuntime.shutdown();
+        logger.removeAppender(appender);
     }
 
     @Test(expectedExceptions = SiddhiAppValidationException.class)
@@ -511,9 +516,11 @@ public class TestCaseOfHl7Sink {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("Sink test if the client uses multiple-byte-character encoding & server uses single-byte encoding ");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Hl7Sink.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        final Logger logger = (Logger) LogManager.getRootLogger();
+        logger.setLevel(Level.ALL);
+        logger.addAppender(appender);
+        appender.start();
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
@@ -535,9 +542,11 @@ public class TestCaseOfHl7Sink {
         } catch (InterruptedException e) {
             AssertJUnit.fail("interrupted");
         }
-        AssertJUnit.assertTrue(appender.getMessages().contains("Error occurred while processing the message." +
+        AssertJUnit.assertTrue(((UnitTestAppender) logger.getAppenders().
+                get("UnitTestAppender")).getMessages().contains("Error occurred while processing the message." +
                 " Please check the TestExecutionPlan:hl7stream"));
         siddhiAppRuntime.shutdown();
+        logger.removeAppender(appender);
     }
 
     @Test
@@ -604,9 +613,11 @@ public class TestCaseOfHl7Sink {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 Sink test with given charset Type is invalid.");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Sink.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        final Logger logger = (Logger) LogManager.getRootLogger();
+        logger.setLevel(Level.ALL);
+        logger.addAppender(appender);
+        appender.start();
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
@@ -617,8 +628,10 @@ public class TestCaseOfHl7Sink {
                 "define stream hl7stream(payload string);";
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(siddhiApp);
         siddhiAppRuntime.start();
-        AssertJUnit.assertTrue(appender.getMessages().contains("UTF_8 Error while connecting at Sink 'hl7'"));
+        AssertJUnit.assertTrue(((UnitTestAppender) logger.getAppenders().
+                get("UnitTestAppender")).getMessages().contains("UTF_8, error while connecting at Sink 'hl7'"));
         siddhiAppRuntime.shutdown();
+        logger.removeAppender(appender);
     }
 
     @Test
@@ -627,9 +640,11 @@ public class TestCaseOfHl7Sink {
         log.info("---------------------------------------------------------------------------------------------");
         log.info("hl7 Sink test with UnSupported Hl7 Encoding - giving text format and preferred as xml");
         log.info("---------------------------------------------------------------------------------------------");
-        log = Logger.getLogger(Hl7Sink.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        final Logger logger = (Logger) LogManager.getRootLogger();
+        logger.setLevel(Level.ALL);
+        logger.addAppender(appender);
+        appender.start();
         SiddhiManager siddhiManager = new SiddhiManager();
         String siddhiApp = "@App:name('TestExecutionPlan')\n" +
                 "@sink(type='hl7', " +
@@ -651,9 +666,11 @@ public class TestCaseOfHl7Sink {
         } catch (InterruptedException e) {
             AssertJUnit.fail("interrupted");
         }
-        AssertJUnit.assertTrue(appender.getMessages().contains("Error occurred while processing the message. Please " +
+        AssertJUnit.assertTrue(((UnitTestAppender) logger.getAppenders().
+                get("UnitTestAppender")).getMessages().contains("Error occurred while processing the message. Please " +
                 "check the TestExecutionPlan:hl7stream"));
         siddhiAppRuntime.shutdown();
+        logger.removeAppender(appender);
     }
 
     @Test(expectedExceptions = SiddhiAppValidationException.class)

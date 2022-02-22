@@ -19,7 +19,8 @@
 package io.siddhi.extension.io.hl7.source;
 
 import ca.uhn.hl7v2.protocol.ReceivingApplicationExceptionHandler;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
@@ -28,7 +29,7 @@ import java.util.Map;
  */
 public class Hl7ExceptionHandler implements ReceivingApplicationExceptionHandler {
 
-    private static final Logger log = Logger.getLogger(Hl7ExceptionHandler.class);
+    private static final Logger log = LogManager.getLogger(Hl7ExceptionHandler.class);
 
     @Override
     public String processException(String s, Map<String, Object> map, String outGoingMsg, Exception e) {
