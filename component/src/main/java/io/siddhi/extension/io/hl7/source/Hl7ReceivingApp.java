@@ -93,9 +93,8 @@ public class Hl7ReceivingApp implements ReceivingApplication {
     }
 
     @Override
-    public Message processMessage(Message message, Map<String, Object> metaData)
-            throws HL7Exception, ReceivingApplicationException {
-
+    public Message processMessage(Message message, Map map)
+            throws ReceivingApplicationException, HL7Exception {
         Parser pipeParser = hapiContext.getPipeParser();
         Parser xmlParser = hapiContext.getXMLParser();
         if (paused) { //spurious wakeup condition is deliberately traded off for performance
