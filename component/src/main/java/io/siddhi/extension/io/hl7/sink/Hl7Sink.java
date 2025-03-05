@@ -308,6 +308,7 @@ public class Hl7Sink extends Sink {
             try {
                 connection.close();
             } catch (IOException e) {
+                connection = null;
                 log.error("Error while closing the connection", e);
             }
         }
