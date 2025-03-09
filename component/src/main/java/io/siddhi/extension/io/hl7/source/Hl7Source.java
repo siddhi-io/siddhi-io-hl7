@@ -298,7 +298,7 @@ public class Hl7Source extends Source {
                     try {
                         in.close();
                     } catch (IOException e) {
-                        log.error(e);
+                        log.error("{}", e);
                     }
                 }
             }

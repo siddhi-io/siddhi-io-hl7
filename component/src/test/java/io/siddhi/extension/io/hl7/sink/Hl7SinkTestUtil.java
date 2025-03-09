@@ -110,8 +110,7 @@ public class Hl7SinkTestUtil {
     class TestApp implements ReceivingApplication {
 
         @Override
-        public Message processMessage(Message message, Map<String, Object> theMetadata) throws HL7Exception {
-
+        public Message processMessage(Message message, Map theMetadata) throws HL7Exception {
             try {
                 count++;
                 eventArrived = true;

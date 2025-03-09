@@ -256,24 +256,23 @@ public class Hl7Sink extends Sink {
                 } else {
                     responseString = xmlParser.encode(response);
                 }
-                log.info("Received Response from " + connection.getRemoteAddress() + ":" +
-                        connection.getRemotePort() + " for stream " + siddhiAppName + ":" + streamID + ":\n" +
-                        responseString.replaceAll("\r", "\n"));
+                log.info("Received Response from {}:{} for stream {}:{}:\n{}", connection.getRemoteAddress(),
+                        connection.getRemotePort(), siddhiAppName, streamID, responseString.replaceAll("\r", "\n"));
             } catch (HL7Exception e) {
                 throw new Hl7SinkRuntimeException("Error occurred while encoding the Received ACK Message " +
                         "into String for stream: " + siddhiAppName + ":" + streamID + ". ", e);
             }
         } catch (HL7Exception e) {
-            log.error("Error occurred while processing the message. Please check the " + siddhiAppName + ":" +
-                    streamID + ". " + e);
+            log.error("Error occurred while processing the message. Please check the {}:{}. {}", siddhiAppName,
+                    streamID, e);
             throw new Hl7SinkRuntimeException("Error occurred while processing the message. Please check the " +
                     siddhiAppName + ":" + streamID + ". ", e);
         } catch (LLPException e) {
             throw new Hl7SinkRuntimeException("Error encountered with MLLP protocol for stream " + siddhiAppName +
                     ":" + streamID + ". ", e);
         } catch (IOException e) {
-            log.error("Interruption occurred while sending the message from stream: " + siddhiAppName + ":" +
-                    streamID + ". " + e);
+            log.error("Interruption occurred while sending the message from stream: {}:{}. {}", siddhiAppName, streamID,
+                    e);
             throw new Hl7SinkRuntimeException("Interruption occurred while sending the message from stream: " +
                     siddhiAppName + ":" + streamID + ". ", e);
         }
@@ -292,8 +291,8 @@ public class Hl7Sink extends Sink {
         }
         try {
             connection = hapiContext.newClient(hostName, port, tlsEnabled);
-            log.info("Executing HL7Sender: HOST: " + hostName + ", PORT: " + port + " for stream " + siddhiAppName +
-                    ":" + streamID + ". ");
+            log.info("Executing HL7Sender: HOST: {}, PORT: {} for stream {}:{}. ", hostName, port, siddhiAppName,
+                    streamID);
         } catch (HL7Exception e) {
             throw new ConnectionUnavailableException("Failed to connect with the HL7 server, check " +
                     "the host.name = " + hostName + ", port = " + port + " defined in " + siddhiAppName + ":" +

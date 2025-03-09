@@ -138,11 +138,11 @@ public class Hl7ReceivingApp implements ReceivingApplication {
         }
         if (hl7AckType.toUpperCase(Locale.ENGLISH).equals("ER7")) {
             String er7AckMsg = pipeParser.encode(ackMsg);
-            log.info("Sent Acknowledgement for stream " + siddhiAppName + ":" + streamID + ": \n" +
+            log.info("Sent Acknowledgement for stream {}:{}: \n{}", siddhiAppName, streamID,
                     er7AckMsg.replaceAll("\r", "\n"));
         } else {
             String xmlAckMsg = xmlParser.encode(ackMsg);
-            log.info("Sent Acknowledgement for stream " + siddhiAppName + ":" + streamID + ": \n" + xmlAckMsg);
+            log.info("Sent Acknowledgement for stream {}:{}: \n{}", siddhiAppName, streamID, xmlAckMsg);
         }
         return ackMsg;
     }
