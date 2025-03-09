@@ -34,7 +34,7 @@ public class Hl7ExceptionHandler implements ReceivingApplicationExceptionHandler
     @Override
     public String processException(String s, Map<String, Object> map, String outGoingMsg, Exception e) {
 
-        log.error("Some error occurred while process the message. Error message: " + e.getMessage());
+        log.error("Some error occurred while process the message. Error message: {}", e.getMessage());
         return outGoingMsg;
     }
 }
